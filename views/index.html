@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Гороскоп</title>
+    <link rel = "stylesheet" type="text/css" href="main.css">
+    <script src="jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../server.js"></script>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
+</head>
+<body>
+<h1>Гороскоп</h1>
+<h2>Узнай о себе</h2>
+
+
+
+
+<script>
+    function dataSelect(data) {
+        let n = data.goroscope.selectedIndex;
+        let name = data.goroscope[n].value;
+        $.ajax({
+            type: "POST",
+            url: "/api/info",
+            data: JSON.stringify({
+                name: name
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success:function (data) {
+                $('#res').empty();
+                for (let i=0; i<data.length; ++i) {
+                    $('#res').append(`<img src="img/${data[i].name}.png" class="center" height="500" width="500">`);
+                    $('#res').append(`<p class="zn"  > ${data[i].text} </p><br/>`);
+                }
+            }
+        });
+    }
+</script>
+
+<form name="sel">
+    <!--<select onchange="document.location=this.options[this.selectedIndex].value">-->
+    <select name="goroscope">
+        <option value="#">Выберите знак</option>
+        <option value="aries">Овен</option>
+        <option value="taurus">Телец</option>
+        <option value="twins">Близнецы</option>
+        <option value="canser">Рак</option>
+        <option value="leo">Лев</option>
+        <option value="virgo">Дева</option>
+        <option value="libra">Весы</option>
+        <option value="scorpio">Скорпион</option>
+        <option value="sagittarius">Стрелец</option>
+        <option value="capricon">Козерог</option>
+        <option value="aquarius">Водолей</option>
+        <option value="fish">Рыбы</option>
+    </select>
+    <input type="button" value="OK" onClick="dataSelect(this.form)">
+
+</form>
+
+
+<form id="res" >
+
+</form>
+
+<div id="footer"  class="zn">
+    <form action="/" method="post" id="form" >
+        <p >Оставить комментарий:</p>
+        <p >Имя пользователя:<br>
+            <textarea name="author"  id="author" placeholder="Введите ваше имя"></textarea></p>
+        <p id="com">Текст:<br>
+            <textarea name="message" rows="5" cols="50" id="message" placeholder="Введите комментарий"></textarea></p>
+        <p >Выберите тему</p>
+        <select id="Тема">
+            <option from id="1">Описание</option>
+
+        </select>
+        <p><input type="submit" value="Отправить" id="send"> <span id="resp"></span></p>
+    </form>
+</div>
+<script>
+    $("form").submit(function (e) {
+        e.preventDefault();
+        let author = $('#author').val();
+        let message = $('#message').val();
+        $("#form").trigger('reset');
+        let mdata = moment();
+        moment.lang('ru');
+        $.ajax({
+            type: "POST",
+            url: "/api/comments",
+            data: JSON.stringify({
+                author: author,
+                message: message,
+                data: mdata
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+                $.ajax({
+                    type: "GET",
+                    url: "/api/comments",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success:function (data) {
+                        $('#result').empty();
+                        for(let i=data.length - 1; i>0; --i){
+                            let end = moment();
+                            $('#result').append(`<textarea readonly rows="1" cols="20"> ${data[i].author} </textarea><br/>`);
+                            $('#result').append(`<textarea readonly rows="5" cols="50"> ${data[i].message} </textarea><br/>`);
+                            $('#result').append(`<textarea readonly rows="1" cols="50"> ${moment(data[i].data).fromNow()} </textarea></br>`);
+
+                        }
+                    }
+                })
+            }
+        });
+
+    });
+    $.ajax({
+        type: "GET",
+        url: "/api/comments",
+        dataType: "json",
+        contentType: "application/json",
+        success:function (data) {
+            for(let i=data.length - 1; i>0; --i){
+                $('#result').append(`<textarea  readonly class="z" rows="1" cols="20" >Автор: ${data[i].author} </textarea><br/>`);
+                $('#result').append(`<textarea readonly class="z" rows="5" cols="50" >Комментарий: ${data[i].message} </textarea><br/>`);
+                $('#result').append(`<textarea readonly class="z" rows="1" cols="50"> Time: ${moment(data[i].data).fromNow()} </textarea></br>`);
+            }
+        }
+    });
+
+</script>
+<!--<div id="left">-->
+<!--<input type="button" onclick="history.back()"  value="назад" >-->
+<!--</div>-->
+
+<!--<p> </p>-->
+
+<form id="result" action="/" method="get" name="res" >
+
+</form>
+
+</body>
+</html>
+

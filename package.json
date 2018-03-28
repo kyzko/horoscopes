@@ -1,0 +1,15 @@
+{
+  "name": "proekt",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "conform": "^0.2.16",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "jquery": "^3.3.1",
+    "moment": "^2.21.0",
+    "mongodb": "^2.2.22",
+    "mongoose": "^5.0.9",
+    "nodemon": "^1.17.1"
+  }
+}

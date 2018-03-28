@@ -1,0 +1,135 @@
+
+body {
+    height: 100%;
+    margin: 2px;
+    text-align: center;
+
+    position: relative;
+
+
+    background-size: cover;
+
+    max-width: 100%
+}
+
+h2 {
+    font-family: Luminari, fantasy;
+    font-size: 290%;
+    font-style: italic ;
+    color: slategrey;
+}
+
+select {
+    font-family: Bradley Hand, cursive;
+    font-size: 100%;
+    font-style: italic ;
+}
+
+input{
+    font-family: Bradley Hand, cursive;
+    font-size: 150%;
+    font-style: italic ;
+    color: slategrey;
+
+}
+
+
+p {
+    font-family: Bradley Hand, cursive;
+
+    font-size: 120%;
+    font-style: italic ;
+    font-weight: 800;
+
+    text-align: center;
+    position: relative;
+    top: 15px;
+    color: slategrey;
+}
+.center {
+    display: block;
+    margin: 0 auto 1.5%;
+}
+h1 {
+    font-family: Luminari, fantasy;
+    font-size: 390%;
+    font-style: italic ;
+    color: slategrey;
+}
+
+#content {
+    width: 250px;
+    margin: 0 auto 50px;
+    color: rgba(17, 17, 17, 0.91);
+}
+#footer {
+
+    left: 0; bottom: 0;
+    color: rgba(0, 0, 0, 0.91);
+
+    width: 100%;
+}
+#container {
+    overflow: auto;
+}
+
+
+
+#left{
+
+    position: fixed;
+    left: 0; bottom: 0;
+}
+#com {
+    font-family: Gill Sans, sans-serif;
+    font-weight: 400;
+    font-style: oblique
+}
+#theme {
+    font-family: Gill Sans, sans-serif;
+    font-weight: 400;
+    font-style: oblique;
+    color: rgba(5, 15, 11, 0.82);
+}
+#footer {
+    height: 1.5em;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.leftimg {
+    float:left; /* Выравнивание по левому краю */
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+
+
+}
+
+.zn {
+    font-family: Luminari, fantasy;
+    font-size: 100%;
+    font-style: italic ;
+    color: slategrey;
+}
+.z {
+    font-family: Luminari, fantasy;
+    font-size: 70%;
+    font-style: italic ;
+    color: #687888;
+    resize: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
